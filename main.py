@@ -1,8 +1,9 @@
 import os
-from PyPtt import PTT
+from typing import Union
 
 import requests
-from typing import Union
+from PyPtt import PTT
+
 
 class Bot:
     def __init__(self, token: str, chat_id: Union[str, int]):
@@ -18,11 +19,13 @@ class Bot:
                               'parse_mode': 'html'
                           })
 
+
 ptt = PTT.API(
     log_level=PTT.log.level.SILENT
 )
 tg = Bot(os.getenv('bot_token'),
          os.getenv('chat_id'))
+
 
 def daily_login():
     try:
@@ -39,20 +42,14 @@ def daily_login():
     except PTT.exceptions.UseTooManyResources:
         tg.sendMessage('PTT 登入失敗！\n使用過多 PTT 資源，請稍等一段時間並增加操作之間的時間間隔')
     else:
-        boards = os.getenv('board')
-        if not boards:
-            boards = ['TigerBlue']
-        else:
-            boards = boards.split(',')
+        check_mail = ptt.has_new_mail()
 
-            for board in boards:
-                _ = ptt.get_newest_index(
-                    PTT.data_type.index_type.BBS,
-                    board=board)
-            text = 'PTT 已成功簽到\n<code>'
-            text += ', '.join(e for e in boards)
-            text += '</code>'
-            tg.sendMessage(text)
+        user = ptt.get_user(os.getenv('acc'))
+        text = f'✔ PTT 已成功簽到\n已登入 {user.login_time} 天\n'
+        if check_mail:
+            text += '👀 你有新信件！'
+        tg.sendMessage(text)
+
 
 if __name__ == '__main__':
     daily_login()
