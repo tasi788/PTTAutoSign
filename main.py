@@ -31,7 +31,7 @@ if not os.getenv('ptt_id_1'):
     print('未輸入帳號資料')
     os.exit(1)
 
-ptt_account = list(os.getenv('ptt_id_1'))
+ptt_account = list([os.getenv('ptt_id_1')])
 for i in range(2, 6):
     pttid_ = os.getenv(f'ptt_id_{i}')
     if pttid_:
@@ -69,6 +69,7 @@ def daily_login(ptt_id: str, ptt_passwd: str):
         now: datetime = datetime.now(tz)
         text += f'#ptt #{now.strftime("%Y%m%d")}'
         tg.sendMessage(text)
+        ptt.logout()
 
 
 if __name__ == '__main__':
