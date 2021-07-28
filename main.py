@@ -20,14 +20,28 @@ class Bot:
                           })
 
 
+# get env
+BOT_TOKEN = os.getenv('bot_token')
+CHAT_ID = os.getenv('chat_id')
+
+if not os.getenv('ptt_id_1'):
+    print('未輸入帳號資料')
+    os.exit(1)
+
+ptt_account = list(os.getenv('ptt_id_1'))
+for i in range(2, 6):
+    pttid_ = os.getenv(f'ptt_id_{i}')
+    if pttid_:
+        ptt_account.append(pttid_)
+
 ptt = PTT.API(
     log_level=PTT.log.level.SILENT
 )
-tg = Bot(os.getenv('bot_token'),
-         os.getenv('chat_id'))
+tg = Bot(BOT_TOKEN,
+         CHAT_ID)
 
 
-def daily_login():
+def daily_login(ptt_id: str, ptt_passwd: str):
     try:
         ptt.login(
             os.getenv('acc'),
@@ -52,4 +66,6 @@ def daily_login():
 
 
 if __name__ == '__main__':
-    daily_login()
+    for pttid in ptt_account:
+        ptt_id, ptt_passwd = pttid.split(',')
+        daily_login()
