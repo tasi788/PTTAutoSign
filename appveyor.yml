@@ -10,6 +10,7 @@ build: off
 install:
 - python --version
 - pip install poetry
+- poetry install
 
 test_script:
 - poetry run python main.py
