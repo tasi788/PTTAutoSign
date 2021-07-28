@@ -62,7 +62,7 @@ def daily_login(ptt_id: str, ptt_passwd: str):
         check_mail = ptt.has_new_mail()
 
         user = ptt.get_user(ptt_id)
-        text = f'✅ PTT {pttid} 已成功簽到\n'
+        text = f'✅ PTT {ptt_id} 已成功簽到\n'
         text += f'📆 已登入 {user.login_time} 天\n'
         if check_mail:
             text += '👀 你有新信件！\n'
