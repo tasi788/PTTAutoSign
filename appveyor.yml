@@ -1,0 +1,15 @@
+image: Ubuntu
+
+stack: python 3.8
+
+environment:
+  board: Gossiping,Stock,Baseball
+
+build: off
+
+install:
+- python --version
+- pip install poetry
+
+test_script:
+- poetry run python main.py
