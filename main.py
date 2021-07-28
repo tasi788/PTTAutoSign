@@ -1,8 +1,8 @@
 import os
-from typing import Union
-
 import requests
 from PyPtt import PTT
+from datetime import datetime, timezone, timedelta
+from typing import Union
 
 
 class Bot:
@@ -19,6 +19,9 @@ class Bot:
                               'parse_mode': 'html'
                           })
 
+
+# 設定為 +8 時區
+tz = timezone(timedelta(hours=+8))
 
 # get env
 BOT_TOKEN = os.getenv('bot_token')
@@ -44,8 +47,8 @@ tg = Bot(BOT_TOKEN,
 def daily_login(ptt_id: str, ptt_passwd: str):
     try:
         ptt.login(
-            os.getenv('acc'),
-            os.getenv('passwd'),
+            ptt_id,
+            ptt_passwd,
             kick_other_login=True)
     except PTT.exceptions.NoSuchUser:
         tg.sendMessage('PTT 登入失敗！\n找不到使用者')
@@ -58,14 +61,17 @@ def daily_login(ptt_id: str, ptt_passwd: str):
     else:
         check_mail = ptt.has_new_mail()
 
-        user = ptt.get_user(os.getenv('acc'))
-        text = f'✔ PTT 已成功簽到\n已登入 {user.login_time} 天\n'
+        user = ptt.get_user(ptt_id)
+        text = f'✅ PTT {pttid} 已成功簽到\n'
+        text += f'📆 已登入 {user.login_time} 天\n'
         if check_mail:
-            text += '👀 你有新信件！'
+            text += '👀 你有新信件！\n'
+        now: datetime = datetime.now(tz)
+        text += f'#ptt #{now.strftime("%Y%m%d")}'
         tg.sendMessage(text)
 
 
 if __name__ == '__main__':
     for pttid in ptt_account:
         ptt_id, ptt_passwd = pttid.split(',')
-        daily_login()
+        daily_login(ptt_id, ptt_passwd)

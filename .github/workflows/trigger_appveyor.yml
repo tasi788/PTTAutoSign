@@ -15,16 +15,16 @@ jobs:
       - name: trigger appveyor to build
         env:
           GH_REPO: ${{ github.repository }}
-          TOKEN: ${{ secrets.appveyor }}
-          # GITHUB_ACTOR
-          # IFS=', ' read -r -a array <<< "$string"
+          TOKEN: ${{ secrets.APPVEYOR }}
         run: |
           IFS='/' read -r -a array <<< "$GH_REPO" && \
+          echo "${array[0]}" && \
+          echo "${array[1]}" && \
           curl --request POST 'https://ci.appveyor.com/api/builds' \
-          --header 'Authorization: Bearer ' "$TOKEN" \
+          --header "Authorization: Bearer  ${TOKEN}" \
           --header 'Content-Type: application/json' \
           --data-raw '{
-              "accountName": "${array[0]}",
-              "projectSlug": "${array[1]}",
+              "accountName": "'"${array[0]}"'",
+              "projectSlug": "'"${array[1]}"'",
               "branch": "main"
           }'
