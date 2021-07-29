@@ -59,16 +59,19 @@ def daily_login(ptt_id: str, ptt_passwd: str):
     except PTT.exceptions.UseTooManyResources:
         tg.sendMessage('PTT 登入失敗！\n使用過多 PTT 資源，請稍等一段時間並增加操作之間的時間間隔')
     else:
-        check_mail = ptt.has_new_mail()
-
-        user = ptt.get_user(ptt_id)
-        text = f'✅ PTT {ptt_id} 已成功簽到\n'
-        text += f'📆 已登入 {user.login_time} 天\n'
-        if check_mail:
-            text += '👀 你有新信件！\n'
-        now: datetime = datetime.now(tz)
-        text += f'#ptt #{now.strftime("%Y%m%d")}'
-        tg.sendMessage(text)
+        try:
+            check_mail = ptt.has_new_mail()
+        except PTT.exceptions.UnregisteredUser:
+            tg.sendMessage(f'{ptt_id} 未註冊使用者')
+        else:
+            user = ptt.get_user(ptt_id)
+            text = f'✅ PTT {ptt_id} 已成功簽到\n'
+            text += f'📆 已登入 {user.login_time} 天\n'
+            if check_mail:
+                text += '👀 你有新信件！\n'
+            now: datetime = datetime.now(tz)
+            text += f'#ptt #{now.strftime("%Y%m%d")}'
+            tg.sendMessage(text)
         ptt.logout()
 
 
