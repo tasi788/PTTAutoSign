@@ -15,7 +15,7 @@ jobs:
       - name: trigger appveyor to build
         env:
           GH_REPO: ${{ github.repository }}
-          TOKEN: ${{ secrets.API_TOKEN }}
+          TOKEN: ${{ secrets.LAYERCI }}
         run: |
           REPO_NAME=${GH_REPO#*/}
           curl -X POST \
