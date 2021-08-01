@@ -1,0 +1,24 @@
+name: Daily Trigger
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 2 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: trigger appveyor to build
+        env:
+          GH_REPO: ${{ github.repository }}
+          TOKEN: ${{ secrets.LAYERCI }}
+        run: |
+          REPO_NAME=${GH_REPO#*/}
+          curl -X POST \
+          -H 'Content-Type: application/json' \
+          -d '{"branch": "main"}' \
+          "https://layerci.com/api/v1/run/${REPO_NAME}?layertoken=${TOKEN}"
