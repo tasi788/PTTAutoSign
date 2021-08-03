@@ -6,6 +6,7 @@ COPY . .
 RUN pip3 install poetry && poetry install
 
 SECRET ENV ptt_id_1
+SECRET ENV ptt_id_
 SECRET ENV bot_token
 SECRET ENV chat_id
 
