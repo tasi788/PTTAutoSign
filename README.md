@@ -10,6 +10,8 @@ PTT 自動簽到，最近老人在用的 PTT 終於又重新開放註冊了，�
 bot_token  -> telegram bot token
 chat_id    -> telegram chat id
 ptt_id_1   -> ptt 帳號 (username,passwd)
+
+** 如果沒有第二個帳號要登入請一樣新增 ptt_id_2 但在輸入帳號與密碼的地方輸入 none **
 ptt_id_2   -> ptt 帳號 (username,passwd)
 ```
 5. 在左側 `Settings` 中找到 `Organization` 將 `Live API Key` 複製起來 \

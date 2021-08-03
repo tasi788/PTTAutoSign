@@ -34,7 +34,7 @@ if not os.getenv('ptt_id_1'):
 ptt_account = list([os.getenv('ptt_id_1')])
 for i in range(2, 6):
     pttid_ = os.getenv(f'ptt_id_{i}')
-    if pttid_:
+    if pttid_ and pttid_ != 'none':
         ptt_account.append(pttid_)
 
 ptt = PTT.API(
