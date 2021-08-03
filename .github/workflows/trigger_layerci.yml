@@ -12,8 +12,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
       - name: trigger LayerCI to build
         env:
           GH_REPO: ${{ github.repository }}
