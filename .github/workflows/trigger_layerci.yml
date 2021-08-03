@@ -1,7 +1,9 @@
 name: Daily Trigger
 
 on:
-  push:
+# New changes will trigger LayerCi automatically.
+# No need to trigger again with github action.
+#  push:
   workflow_dispatch:
   schedule:
     - cron: "30 2 * * *"
@@ -10,9 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
-      - name: trigger appveyor to build
+      - name: trigger LayerCI to build
         env:
           GH_REPO: ${{ github.repository }}
           TOKEN: ${{ secrets.LAYERCI }}
