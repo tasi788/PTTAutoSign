@@ -2,6 +2,9 @@ FROM vm/ubuntu:18.04
 
 RUN apt-get update && apt-get install python3.8 python3-pip
 
+# Fix Python not found in PATH
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.8 10
+
 COPY . .
 RUN pip3 install poetry && poetry install
 
