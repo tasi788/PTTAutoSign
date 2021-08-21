@@ -1,5 +1,10 @@
 # PTTAutoSign
-PTT 自動簽到，最近老人在用的 PTT 終於又重新開放註冊了，我也嘗試當個老人。
+PTT 自動簽到，最近老人在用的 PTT 終於又重新開放註冊了，我也嘗試當個老人。 \
+![kachow 2021-08-21 at 13 36 12@2x](https://user-images.githubusercontent.com/11913223/130311745-97ccf57e-6c67-423e-b4a6-d74908dd9df9.png)
+
+✅ 不需要額外伺服器 \
+🚀 即時發送通知到 Telegam \
+👷‍♂️ 不需額外維護 
 
 1. 首先右上角 Star 給他按下去，接著 `fork` 一份。哪天如果被我海巡到會被我單方面的 Block。
 2. 接著打開 [Layerci](https://layerci.com) 用一個舒服的方式登入或註冊。
