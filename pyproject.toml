@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "pttautosign"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["tasi788 <tdc@tdccc.com.tw>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-PyPtt = "^0.9.47"
-requests = "^2.26.0"
+python = "^3.11"
+PyPtt = "^1.2.0"
+requests = "^2.31.0"
 
 [tool.poetry.dev-dependencies]
 
