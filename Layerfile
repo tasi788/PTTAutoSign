@@ -3,7 +3,7 @@ FROM vm/ubuntu:18.04
 RUN apt-get update && apt-get install python3.8 python3-pip
 
 COPY . .
-RUN pip3 install poetry==1.2.0a2 && poetry install
+RUN pip3 install poetry==1.8.2 && poetry install
 CHECKPOINT disabled
 
 SECRET ENV ptt_id_1
