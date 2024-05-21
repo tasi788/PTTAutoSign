@@ -58,7 +58,7 @@ def daily_login(ptt_id: str, ptt_passwd: str):
     else:
         user = ptt.get_user(ptt_id)
         text = f"✅ PTT {ptt_id} 已成功簽到\n"
-        text += f'📆 已登入 {user.get('login_count')} 天\n'
+        text += f"📆 已登入 {user.get('login_count')} 天\n"
         text += "📫 " + user.get("mail") + "\n"
 
         now: datetime = datetime.now(tz)
